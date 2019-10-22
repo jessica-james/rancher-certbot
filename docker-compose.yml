@@ -1,0 +1,19 @@
+version: '2'
+volumes:
+- certs: {}
+- lib: {}
+services:
+  certbot:
+    image: containers.cisco.com/jamchapp/certbot:v1.0.0
+    ports:
+    - 443:443
+    environment:
+      AWS_ACCESS_KEY: x
+      AWS_SECRET_KEY: x
+      RANCHER_ACCESS_KEY: x
+      RANCHER_SECRET_KEY: x
+      DOMAINS: cslist
+      ENVIRONMENTS: cslist
+    volumes:
+    - certs:/etc/letsencrypt
+    - lib:/var/lib/letsencrypt
