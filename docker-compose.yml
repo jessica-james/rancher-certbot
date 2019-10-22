@@ -5,15 +5,15 @@ volumes:
 services:
   certbot:
     image: containers.cisco.com/jamchapp/certbot:v1.0.0
-    ports:
-    - 443:443
     environment:
-      AWS_ACCESS_KEY: x
-      AWS_SECRET_KEY: x
-      RANCHER_ACCESS_KEY: x
-      RANCHER_SECRET_KEY: x
-      DOMAINS: cslist
-      ENVIRONMENTS: cslist
+      AWS_ACCESS_KEY_ID: changeme
+      AWS_SECRET_KEY: changeme
+      RANCHER_ACCESS_KEY: changeme
+      RANCHER_SECRET_KEY: changeme # Rancher Creds must have access to the environment the cert will be uploaded to
+      DOMAINS: '["test1", "test2"]' #the prefix, will rename this later -- prefix e.g. <prefix>.<env1>.crate.farm
+      ENVIRONMENTS: '["env1", "env2"]' #
+      TLD: crate.farm
+      RANCHER_URL: https://console.ciscocrate.com/v2-beta/
     volumes:
     - certs:/etc/letsencrypt
     - lib:/var/lib/letsencrypt
