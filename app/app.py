@@ -34,7 +34,7 @@ class CertAutomation:
         subprocess.call(f'{self.certbot_path} {self.certbot_command}', shell=True)
 
     def uploadCert(self):
-        self.session = requests.Session()
+        session = requests.Session()
         with open(self.cert_path, "r") as cert, open(self.chain_path, "r") as chain, open(self.key_path, "r") as key:
             self.body = {
                 "type"       : "certificate",
@@ -47,7 +47,7 @@ class CertAutomation:
                 "removed"    : 'null',
                 "uuid"       : 'null'
             }
-            response = self.session.post(self.api_path, auth=self.auth, verify=self.verify, data=self.body)
+            response = session.post(self.api_path, auth=self.auth, verify=self.verify, data=self.body)
             return response.status_code
 
 
